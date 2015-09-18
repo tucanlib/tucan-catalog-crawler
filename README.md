@@ -1,4 +1,6 @@
-# Yeah
+# Usage at your own risk!
+
+## Yeah
 1. npm install
 2. Create a file called ```START_URL.txt``` and paste the START_URL (see bottom) into there
 3. Create a folder called ```output```
