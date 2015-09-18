@@ -5,7 +5,7 @@ var helper = require('./steps/helper'),
     step4 = require('./steps/4-parse-module-details.js'),
     step5 = require('./steps/5-merge-module-details.js');
 
-// Log into TuCan and go to "Anmeldung" - copy the URL and put it here!
+// See README
 var START_URL = helper.getStartUrl('./START_URL.txt');
 
 if(!START_URL) {
