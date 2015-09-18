@@ -13,4 +13,4 @@ Log into TuCan and go to: "Veranstaltungen" -> "Anmeldung"
 Copy the the URL
 
 
-(Pro-tip: don't look in the source-code... you have been warned! It's terrible)
+Don't look in the source-code... you have been warned! It's terrible. No error handling at all and a lot of late night-code
