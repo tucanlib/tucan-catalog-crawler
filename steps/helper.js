@@ -5,8 +5,9 @@ var R = require('ramda'),
     encoding = {
         encoding: 'utf-8'
     },
+    readFileSync = R.curry(fs.readFileSync)(R.__, encoding),
     writeFileSync = R.curry(fs.writeFileSync)(R.__, R.__, encoding),
-    readJSONFile = R.pipe(R.curry(fs.readFileSync)(R.__, encoding), JSON.parse);
+    readJSONFile = R.pipe(readFileSync, JSON.parse);
 
 
 function findModule(moduleName, modules) {
@@ -21,6 +22,9 @@ module.exports = {
     writeJSONFile: R.curry(function(filename, data) {
         return writeFileSync(filename, prettyJSON(data));
     }),
+    getStartUrl: function(path) {
+        return R.trim(readFileSync(path));
+    },
     getPage: function(url) {
         return rp({
             url: url,
