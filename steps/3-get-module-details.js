@@ -1,8 +1,10 @@
 var cheerio = require('cheerio'),
     R = require('ramda'),
     Bluebird = require('bluebird'),
-    rp = require('request-promise'),
     helper = require('./helper');
+
+var ProgressBar = require('progress');
+
 
 function getCourses(modules) {
     function flatten(list, acc) {
@@ -22,12 +24,8 @@ function getCourses(modules) {
 }
 
 function getCourseDetails(course) {
-    return rp({
-            uri: course.url,
-            headers: {
-                'Cookie': 'cnsc=0'
-            }
-        })
+    return helper
+        .getPage(course.url)
         .then(function(res) {
             var $ = cheerio.load(res);
             course.data = $('#pageContent').html();
@@ -39,9 +37,14 @@ module.exports = function() {
     return Bluebird
         .resolve(helper.readJSONFile('output/2.json'))
         .then(getCourses)
-        .tap(R.pipe(R.prop('length'), console.log))
         .then(function(modules) {
+            console.log('Crawling module details for ' + modules.length + ' courses:');
+            var bar = new ProgressBar(':current from :total - Time remaining :eta s || :bar', {
+                total: modules.length
+            });
+
             return Bluebird.reduce(modules, function(acc, module) {
+                bar.tick();
                 return getCourseDetails(module).then(function(res) {
                     acc.push(res);
                     return acc;

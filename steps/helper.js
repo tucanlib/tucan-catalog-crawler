@@ -17,19 +17,23 @@ function findModule(moduleName, modules) {
     return found ? found : findModule(moduleName, R.filter(R.prop('children'), R.flatten(R.pluck('children', modules))));
 }
 
+var COOKIE;
+
 module.exports = {
     readJSONFile: readJSONFile,
     writeJSONFile: R.curry(function(filename, data) {
         return writeFileSync(filename, prettyJSON(data));
     }),
-    getStartUrl: function(path) {
-        return R.trim(readFileSync(path));
+    getStartUrl: R.pipe(readFileSync, R.trim),
+    setCookie: function(cookie) {
+        COOKIE = cookie;
     },
+    getFile: R.pipe(readFileSync, R.trim),
     getPage: function(url) {
         return rp({
             url: url,
             headers: {
-                'Cookie': 'cnsc=0'
+                'Cookie': COOKIE
             }
         });
     },

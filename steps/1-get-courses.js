@@ -11,7 +11,7 @@ function extractLinks(html) {
     }
 
     var isBlackListed = function(a) {
-        return 'Anmelden Gesamtkatalog Zusätzliche Leistungen Leistungen für den Masterstudiengang Gesamtkatalog aller Module des Sprachenzentrums Informatik fachübergreifend Fachübergreifende Veranstaltungen'.toLowerCase().indexOf(a.toLowerCase()) >= 0;
+        return 'Abmelden Anmelden Gesamtkatalog Zusätzliche Leistungen Leistungen für den Masterstudiengang Gesamtkatalog aller Module des Sprachenzentrums Informatik fachübergreifend Fachübergreifende Veranstaltungen'.toLowerCase().indexOf(a.toLowerCase()) >= 0;
     };
 
     var $ = cheerio.load(html);
@@ -62,7 +62,7 @@ function getAll(links) {
         });
 }
 
-module.exports = function(startUrl) {
+module.exports = function(startUrl, cookie) {
     return getAll([{
             name: 'START',
             url: startUrl

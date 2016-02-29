@@ -3,3 +3,4 @@ bower_components
 .DS_Store
 output/*
 START_URL.txt
+COOKIE.txt

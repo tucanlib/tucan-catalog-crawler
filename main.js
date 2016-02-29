@@ -6,14 +6,17 @@ var helper = require('./steps/helper'),
     step5 = require('./steps/5-merge-module-details.js');
 
 // See README
-var START_URL = helper.getStartUrl('./START_URL.txt');
+var START_URL = helper.getStartUrl('./START_URL.txt'),
+    COOKIE = helper.getFile('./COOKIE.txt');
+
+helper.setCookie(COOKIE);
 
 if(!START_URL) {
     console.error('No START_URL given (see README)');
     process.exit(0);
 }
 
-step1(START_URL)
+step1(START_URL, COOKIE)
     .then(step2)
     .then(step3)
     .then(step4)
