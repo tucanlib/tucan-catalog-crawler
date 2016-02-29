@@ -21,5 +21,4 @@ copy(document.cookie)
 The cookie is now in your clipboard. Paste it in COOKIE.txt
 
 
-
 Don't look in the source-code... you have been warned! It's terrible. No error handling at all and a lot of late night-code
