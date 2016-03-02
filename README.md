@@ -6,8 +6,9 @@
 3. Create a file called ```COOKIE.txt``` and paste the COOKIE (see bottom) into there
 4. Create a folder called ```output```
 5. node main.js
-6. ```output/5.json``` will hold all the information you need
+6. ```output/6.json``` will hold all the information you need
 7. Don't know... do something you really like instead of unnecessary stuff like this
+
 
 ## Get START_URL
 Log into TuCan and go to: "Veranstaltungen" -> "Anmeldung"

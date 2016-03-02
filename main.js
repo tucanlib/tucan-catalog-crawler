@@ -3,7 +3,8 @@ var helper = require('./steps/helper'),
     step2 = require('./steps/2-cleanup-tree.js'),
     step3 = require('./steps/3-get-module-details.js'),
     step4 = require('./steps/4-parse-module-details.js'),
-    step5 = require('./steps/5-merge-module-details.js');
+    step5 = require('./steps/5-merge-module-details.js'),
+    step6 = require('./steps/6-sanitize');
 
 // See README
 var START_URL = helper.getStartUrl('./START_URL.txt'),
@@ -21,6 +22,7 @@ step1(START_URL, COOKIE)
     .then(step3)
     .then(step4)
     .then(step5)
+    .then(step6)
     .then(function() {
         console.log('FINISHED :)');
     });
