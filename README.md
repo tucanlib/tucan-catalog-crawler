@@ -1,6 +1,4 @@
-# Usage at your own risk!
-
-## Yeah
+# Yeah
 1. npm install
 2. Create a file called ```START_URL.txt``` and paste the START_URL (see bottom) into there
 3. Create a file called ```COOKIE.txt``` and paste the COOKIE (see bottom) into there
@@ -10,11 +8,11 @@
 7. Don't know... do something you really like instead of unnecessary stuff like this
 
 
-## Get START_URL
+### Get START_URL
 Log into TuCan and go to: "Veranstaltungen" -> "Anmeldung"
 Copy the the URL
 
-## Get COOKIE
+### Get COOKIE
 Log into TuCan, open the dev-tools - enter:
 ```
 copy(document.cookie)
@@ -22,4 +20,8 @@ copy(document.cookie)
 The cookie is now in your clipboard. Paste it in COOKIE.txt
 
 
+### Optional: Display the data with [tucan-catalog](https://github.com/davidgengenbach/tucan-catalog)
+See repo README for that
+
+# Usage at your own risk!
 Don't look in the source-code... you have been warned! It's terrible. No error handling at all and a lot of late night-code
