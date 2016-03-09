@@ -36,21 +36,37 @@ function sanitizeText(text) {
     }];
 
     return R.trim(R.reduce(function(acc, replacement) {
-        return acc.replace(replacement.toReplace, replacement.replacement || '');
+        return acc.replace(replacement.toReplace, replacement.replacement ||  '');
     }, text, replacements));
+}
+
+function extractCP(details) {
+    if(!details) return;
+
+    function getCP(data) {
+        return parseInt(R.trim(R.head(data.split(' '))), 10);
+    }
+
+    var CP = R.find(function(item) {
+        return item.title.indexOf('Credits') >= 0;
+    }, details);
+
+    return CP ? getCP(CP.details) : null;
 }
 
 function sanitize(moduleData) {
     delete moduleData.url;
 
-    if(moduleData.details && moduleData.details.length) {
+    moduleData.credits = extractCP(moduleData.details);
+
+    if (moduleData.details && moduleData.details.length) {
         R.forEach(function(detail) {
             detail.title = sanitizeText(detail.title);
             detail.details = sanitizeText(detail.details);
         }, moduleData.details);
     }
 
-    if(moduleData.children && moduleData.children.length) {
+    if (moduleData.children && moduleData.children.length) {
         R.forEach(sanitize, moduleData.children);
     }
 }
