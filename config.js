@@ -6,9 +6,9 @@ var readFileSync = R.pipe(R.curry(fs.readFileSync)(R.__, {
 }), R.trim);
 
 module.exports = {
-    "user": JSON.parse(readFileSync('./user.json')),
-    "baseUrl": "https://www.tucan.tu-darmstadt.de",
-    "blacklist": "Abmelden Anmelden Gesamtkatalog Zusätzliche Leistungen Leistungen für den Masterstudiengang Gesamtkatalog aller Module des Sprachenzentrums Informatik fachübergreifend Fachübergreifende Veranstaltungen",
+    user: JSON.parse(readFileSync('./user.json')),
+    baseUrl: 'https://www.tucan.tu-darmstadt.de',
+    blacklist: 'Abmelden Anmelden Gesamtkatalog Zusätzliche Leistungen Leistungen für den Masterstudiengang Gesamtkatalog aller Module des Sprachenzentrums Informatik fachübergreifend Fachübergreifende Veranstaltungen',
     selectors: {
         LoginUser: '#field_user',
         LoginPass: '#field_pass',

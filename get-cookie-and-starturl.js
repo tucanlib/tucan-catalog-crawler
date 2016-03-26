@@ -35,7 +35,10 @@ module.exports = function getCookieAndStartUrl() {
         .then(function() {
             return [data.startUrl, data.cookie];
         })
-        .catch(console.error);
+        .catch(function(err) {
+            console.error('There was an error retrieving cookie/starturl, please check your credentials (see README)', err);
+            throw err;
+        });
 };
 
 function log() {
