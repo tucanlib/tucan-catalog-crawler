@@ -1,7 +1,8 @@
 # Yeah
-1. `npm install`
+1. Clone or download repo
+1. Execute `npm install`
 1. Enter your tucan credentials in `user.json` (needed because you have to be logged in to see the courses you can take)
-1. `get-courses`
+1. Execute `npm run get-courses`
 1. `output/6.json` will hold all the information you need
 1. Don't know... do something you really like instead of unnecessary stuff like this
 
@@ -9,4 +10,4 @@
 _See repo README for that_
 
 ## Usage at your own risk!
-Don't look in the source-code... you have been warned! It's terrible. No error handling at all and a lot of late night-code
+And please don't look into the code :smile:
