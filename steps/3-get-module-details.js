@@ -38,7 +38,7 @@ module.exports = function() {
         .resolve(helper.readJSONFile('output/2.json'))
         .then(getCourses)
         .then(function(modules) {
-            console.log('Crawling module details for ' + modules.length + ' courses:');
+            console.log('#Courses:', modules.length);
             var bar = new ProgressBar(':current from :total - Time remaining :eta s || :bar', {
                 total: modules.length
             });

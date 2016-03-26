@@ -1,4 +1,5 @@
 var helper = require('./steps/helper'),
+    getCookieAndStartupUrlScript = require('./get-cookie-and-starturl.js'),
     step1 = require('./steps/1-get-courses.js'),
     step2 = require('./steps/2-cleanup-tree.js'),
     step3 = require('./steps/3-get-module-details.js'),
@@ -6,23 +7,23 @@ var helper = require('./steps/helper'),
     step5 = require('./steps/5-merge-module-details.js'),
     step6 = require('./steps/6-sanitize');
 
-// See README
-var START_URL = helper.getStartUrl('./START_URL.txt'),
-    COOKIE = helper.getFile('./COOKIE.txt');
+getCookieAndStartupUrlScript()
+    .spread(function(startUrl, cookie) {
+        helper.setCookie(cookie);
+        helper.setStartUrl(startUrl);
+    })
+    .then(logAndExecute('>> Step1: Getting courses', step1))
+    .then(logAndExecute('>> Step2: Cleaning up tree', step2))
+    .then(logAndExecute('>> Step3: Getting module details', step3))
+    .then(logAndExecute('>> Step4: Parsing module details', step4))
+    .then(logAndExecute('>> Step5: Merge module details', step5))
+    .then(logAndExecute('>> Step6: Sanitizing', step6))
+    .then(logAndExecute('>> Finished!', process.exit.bind(process, 0)))
+    .catch(console.error);
 
-helper.setCookie(COOKIE);
-
-if(!START_URL) {
-    console.error('No START_URL given (see README)');
-    process.exit(0);
+function logAndExecute(msg, fn) {
+    return function() {
+        console.log(msg);
+        return fn.apply(null, arguments);
+    };
 }
-
-step1(START_URL, COOKIE)
-    .then(step2)
-    .then(step3)
-    .then(step4)
-    .then(step5)
-    .then(step6)
-    .then(function() {
-        console.log('FINISHED :)');
-    });

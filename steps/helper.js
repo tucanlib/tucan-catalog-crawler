@@ -9,22 +9,23 @@ var R = require('ramda'),
     writeFileSync = R.curry(fs.writeFileSync)(R.__, R.__, encoding),
     readJSONFile = R.pipe(readFileSync, JSON.parse);
 
-
-function findModule(moduleName, modules) {
-    var found = R.find(function(item) {
-        return item && item.text === moduleName;
-    }, modules);
-    return found ? found : findModule(moduleName, R.filter(R.prop('children'), R.flatten(R.pluck('children', modules))));
-}
-
-var COOKIE;
+var COOKIE,
+    START_URL;
 
 module.exports = {
     readJSONFile: readJSONFile,
     writeJSONFile: R.curry(function(filename, data) {
         return writeFileSync(filename, prettyJSON(data));
     }),
-    getStartUrl: R.pipe(readFileSync, R.trim),
+    getStartUrl: function() {
+        return START_URL;
+    },
+    getCookie: function() {
+        return COOKIE;
+    },
+    setStartUrl: function(startUrl) {
+        START_URL = startUrl;
+    },
     setCookie: function(cookie) {
         COOKIE = cookie;
     },
@@ -37,5 +38,10 @@ module.exports = {
             }
         });
     },
-    findModule: findModule
+    findModule: function findModule(moduleName, modules) {
+        var found = R.find(function(item) {
+            return item && item.text === moduleName;
+        }, modules);
+        return found ? found : findModule(moduleName, R.filter(R.prop('children'), R.flatten(R.pluck('children', modules))));
+    }
 };

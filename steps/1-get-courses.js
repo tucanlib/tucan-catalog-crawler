@@ -1,9 +1,11 @@
 var cheerio = require('cheerio'),
     R = require('ramda'),
+    config = require('../config.js'),
     Bluebird = require('bluebird'),
     helper = require('./helper');
 
-var URL_BASE = 'https://www.tucan.tu-darmstadt.de';
+var URL_BASE = config.baseUrl,
+    BLACKLIST = config.blacklist;
 
 function extractLinks(html) {
     if (typeof html !== 'string') {
@@ -11,11 +13,11 @@ function extractLinks(html) {
     }
 
     var isBlackListed = function(a) {
-        return 'Abmelden Anmelden Gesamtkatalog Zusätzliche Leistungen Leistungen für den Masterstudiengang Gesamtkatalog aller Module des Sprachenzentrums Informatik fachübergreifend Fachübergreifende Veranstaltungen'.toLowerCase().indexOf(a.toLowerCase()) >= 0;
+        return BLACKLIST.toLowerCase().indexOf(a.toLowerCase()) >= 0;
     };
 
     var $ = cheerio.load(html);
-    return $('#pageContent ul > li > a, #pageContent .tbcoursestatus td:not(.tbdata.dl-inner) a')
+    return $(config.selectors.Course)
         .map(function(index, link) {
             var url = $(link).attr('href');
 
@@ -62,10 +64,10 @@ function getAll(links) {
         });
 }
 
-module.exports = function(startUrl, cookie) {
+module.exports = function() {
     return getAll([{
             name: 'START',
-            url: startUrl
+            url: helper.getStartUrl()
         }])
         .then(helper.writeJSONFile('output/1.json'));
 };

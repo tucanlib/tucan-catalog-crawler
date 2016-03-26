@@ -5,7 +5,7 @@ var R = require('ramda'),
 function cleanUp(tree) {
     return R.map(function(node) {
         if(node.children) {
-            if(node.children[0] == null) node.children = [];
+            if(!node.children[0]) node.children = [];
             node.children = cleanUp(node.children);
         }
         return {

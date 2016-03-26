@@ -1,43 +1,12 @@
 var helper = require('./helper'),
     R = require('ramda'),
-    Bluebird = require('bluebird');
+    Bluebird = require('bluebird'),
+    config = require('../config.js');
 
 function sanitizeText(text) {
-    var replacements = [{
-        toReplace: /&#xFC;/g,
-        replacement: 'ü'
-    }, {
-        toReplace: /&#xA7;/g,
-        replacement: '§'
-    }, {
-        toReplace: /&#xE4;/g,
-        replacement: 'ä'
-    }, {
-        toReplace: /&#xDC;/g,
-        replacement: 'Ü'
-    }, {
-        toReplace: /&#xF6;/g,
-        replacement: 'ö'
-    }, {
-        // remove <br>'s from the end
-        toReplace: /<br><br>$/g
-    }, {
-        // a second time - just to be sure
-        toReplace: /<br>$/g
-    }, {
-        toReplace: /\t/g
-    }, {
-        toReplace: /\n/g
-    }, {
-        toReplace: /\r/g
-    }, {
-        // remove <br> from the beginning
-        toReplace: /^:<br>/g
-    }];
-
     return R.trim(R.reduce(function(acc, replacement) {
         return acc.replace(replacement.toReplace, replacement.replacement ||  '');
-    }, text, replacements));
+    }, text, config.replacements));
 }
 
 function extractCP(details) {

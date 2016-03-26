@@ -1,6 +1,5 @@
 node_modules
-bower_components
 .DS_Store
 output/*
-START_URL.txt
-COOKIE.txt
+user.json
+download-and-compare.sh
