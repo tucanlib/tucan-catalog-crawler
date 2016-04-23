@@ -1,6 +1,7 @@
 var helper = require('./steps/helper');
+var config = require('./config');
 
-require('./get-cookie-and-starturl.js')()
+require('./get-cookie-and-starturl.js')(config.user.username, config.user.password, config.baseUrl, config.selectors)
     .spread(function(startUrl, cookie) {
         helper.setCookie(cookie);
         helper.setStartUrl(startUrl);

@@ -10,4 +10,3 @@
 _See repo README for that_
 
 ## Usage at your own risk!
-And please don't look into the code :smile:

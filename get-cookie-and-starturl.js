@@ -1,26 +1,19 @@
-var horseman = new require('node-horseman')();
-
-var config = require('./config.js');
+/* jshint node: true */
+var tucanLogin = require('./tucan-login.js');
 
 var data = {
     startUrl: undefined,
     cookie: undefined
 };
 
-module.exports = function getCookieAndStartUrl() {
-    console.log('Getting startUrl and cookie for user:', config.user);
-    return horseman
-        .open(config.baseUrl)
-        .waitForSelector(config.selectors.LoginSubmit)
-        .type(config.selectors.LoginUser, config.user.tuid)
-        .type(config.selectors.LoginPass, config.user.password)
-        .click(config.selectors.LoginSubmit)
-        .tap(log('Logged in'))
-        .waitForSelector(config.selectors.Veranstaltungen)
-        .click(config.selectors.Veranstaltungen)
-        .waitForSelector(config.selectors.Anmeldung)
-        .click(config.selectors.Anmeldung)
-        .waitForSelector(config.selectors.HeadlineAnmeldung)
+module.exports = function getCookieAndStartUrl(username, password, baseUrl, selectors) {
+    return tucanLogin
+        .login(username, password, baseUrl, selectors)
+        .tap(log('Retreiving cookie and startUrl'))
+        .click(selectors.Veranstaltungen)
+        .waitForSelector(selectors.Anmeldung)
+        .click(selectors.Anmeldung)
+        .waitForSelector(selectors.HeadlineAnmeldung)
         .tap(log('Getting startUrl'))
         .url()
         .then(function(url) {
