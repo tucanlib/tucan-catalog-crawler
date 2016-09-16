@@ -3,3 +3,4 @@ node_modules
 output/*
 user.json
 download-and-compare.sh
+copy-to-catalog.sh

@@ -1,3 +1,7 @@
+**Deprecated!**
+
+I wrote a python version ([vv-exporter.py](https://github.com/davidgengenbach/tucan-grades-exporter/blob/master/vv_exporter.py) - see repo README for instructions), which does not need an headless browser!
+
 # Yeah
 1. Clone or download repo
 1. Execute `npm install`
@@ -8,5 +12,3 @@
 
 ## Optional: Display the data with [tucan-catalog](https://github.com/davidgengenbach/tucan-catalog)
 _See repo README for that_
-
-## Usage at your own risk!
